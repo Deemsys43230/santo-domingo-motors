@@ -21,9 +21,9 @@ from app import data_store  # noqa: E402
 
 @pytest.fixture()
 def temp_data_dir(monkeypatch):
-    """Copy the real /data dir to a temp dir and point data_store at it,
+    """Copy the real /mock_data dir to a temp dir and point data_store at it,
     so tests never mutate the shipped mock data."""
-    src = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
+    src = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "mock_data")
     tmp = tempfile.mkdtemp()
     for fname in os.listdir(src):
         shutil.copy(os.path.join(src, fname), tmp)
@@ -50,7 +50,7 @@ def test_search_vehicles_by_budget(temp_data_dir):
 def test_compare_vehicles(temp_data_dir):
     from app.tools import sales_tools
 
-    result = sales_tools.compare_vehicles(["Tucson", "Santa Fe"])
+    result = sales_tools.compare_vehicles(["Groove", "Tracker"])
     assert len(result["vehicles"]) == 2
     assert result["not_found"] == []
 
@@ -58,29 +58,29 @@ def test_compare_vehicles(temp_data_dir):
 def test_get_vehicle_price_from_data_not_llm(temp_data_dir):
     from app.tools import sales_tools
 
-    result = sales_tools.get_vehicle_price("Tucson")
+    result = sales_tools.get_vehicle_price("Groove")
     assert result is not None
-    assert result["price"] == 34500
+    assert result["price"] == 24900
 
 
 def test_book_test_drive_removes_slot(temp_data_dir):
     from app.tools import sales_tools
 
-    before = sales_tools.check_test_drive_availability("L1", "2026-08-13")
+    before = sales_tools.check_test_drive_availability("kennedy", "2026-08-13")
     assert "09:00" in before
 
-    outcome = sales_tools.book_test_drive(
+    result = sales_tools.book_test_drive(
         customer_name="Jane Doe",
-        phone="809-555-0101",
-        email="jane@example.com",
-        vehicle="Tucson",
-        location="L1",
+        phone="809-555-9999",
+        email=None,
+        vehicle="Groove",
+        location="kennedy",
         date="2026-08-13",
         time="09:00",
     )
-    assert outcome["success"] is True
+    assert result["success"] is True
 
-    after = sales_tools.check_test_drive_availability("L1", "2026-08-13")
+    after = sales_tools.check_test_drive_availability("kennedy", "2026-08-13")
     assert "09:00" not in after
 
 
