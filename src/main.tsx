@@ -28,7 +28,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Header />
           <main>
             <Hero />
-            <Brands />
+            {/* <Brands /> */}
             <VehiclesSection />
             <Featured />
             <Services />

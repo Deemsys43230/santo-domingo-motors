@@ -38,9 +38,8 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        solid ? "bg-[#080808] border-b border-white/10" : "border-b border-transparent"
-      }`}
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${solid ? "bg-[#080808] border-b border-white/10" : "border-b border-transparent"
+        }`}
     >
       <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-5 sm:px-8">
         {/* Logo */}
@@ -113,9 +112,8 @@ export function Header() {
                 {i === 1 && <span className="text-white/30">|</span>}
                 <button
                   onClick={() => setLang(l)}
-                  className={`uppercase transition-colors hover:text-[#FFC72C] ${
-                    lang === l ? "text-[#FFC72C]" : "text-white/50"
-                  }`}
+                  className={`uppercase transition-colors hover:text-[#FFC72C] ${lang === l ? "text-[#FFC72C]" : "text-white/50"
+                    }`}
                 >
                   {l}
                 </button>

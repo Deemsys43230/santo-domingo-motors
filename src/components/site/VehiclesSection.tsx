@@ -51,11 +51,10 @@ export function VehiclesSection() {
               <button
                 key={tb.key}
                 onClick={() => setTab(tb.key)}
-                className={`eyebrow shrink-0 border-b-2 px-5 py-4 text-[11px] tracking-[0.2em] transition-all duration-200 -mb-[2px] ${
-                  tab === tb.key
+                className={`eyebrow shrink-0 border-b-2 px-5 py-4 text-[11px] tracking-[0.2em] transition-all duration-200 -mb-[2px] ${tab === tb.key
                     ? "border-[#FFC72C] text-[#080808] font-bold"
                     : "border-transparent text-[#6b6b6b] hover:text-[#080808]"
-                }`}
+                  }`}
               >
                 {tb.label}
               </button>
