@@ -16,6 +16,12 @@ log = get_logger("tools.service")
 def get_service_types() -> list[dict]:
     return data_store.read_table("service_types")
 
+def get_service_locations() -> list[dict]:
+    """Returns a list of branches that offer service."""
+    from app.tools.branch_tools import get_all_branches
+    branches = get_all_branches()
+    return [b for b in branches if b.get("active", True) and "service" in (s.lower() for s in b.get("services", []))]
+
 
 
 

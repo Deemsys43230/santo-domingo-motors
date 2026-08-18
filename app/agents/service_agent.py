@@ -6,20 +6,22 @@ Check Availability, Book Appointment, Confirm Appointment, Service Details.
 """
 from __future__ import annotations
 
-from livekit.agents import RunContext, function_tool
+from livekit.agents import RunContext, function_tool, llm
 
 from app.agents.base import DepartmentAgent
-from app.tools import service_tools
+from app.tools import service_tools, branch_tools
 from app.utils.logger import get_logger
 
 log = get_logger("agents.service")
 
 SERVICE_INSTRUCTIONS = """
-You are the Service specialist for Santo Domingo Motors, speaking with a
-customer over a live voice call after a handoff from the Supervisor agent.
-Greet briefly and continue naturally.
+You are the AI assistant for Santo Domingo Motors, speaking with a
+customer over a live voice call. Do NOT introduce yourself or greet the customer,
+as they are already in the middle of a conversation with you. Seamlessly continue
+the conversation based on the context.
 
 Your job:
+- CRITICAL: The customer's name, phone, and email are ALREADY collected and verified. NEVER ask the customer for their name, phone, or email under any circumstance. Extract them directly from the conversation history when booking an appointment.
 - Understand the customer's service need in plain language (e.g. "oil change",
   "my car is making a noise", "I need a service").
 - Use get_service_details to explain what a service type involves if asked.
@@ -41,8 +43,8 @@ Ask one question at a time when collecting details.
 class ServiceAgent(DepartmentAgent):
     department = "service"
 
-    def __init__(self) -> None:
-        super().__init__(instructions=SERVICE_INSTRUCTIONS)
+    def __init__(self, chat_ctx: llm.ChatContext | None = None) -> None:
+        super().__init__(instructions=SERVICE_INSTRUCTIONS, chat_ctx=chat_ctx)
 
     @function_tool()
     async def get_service_details(self, context: RunContext, service_type: str | None = None):
@@ -52,6 +54,19 @@ class ServiceAgent(DepartmentAgent):
             service_type: Name of the service, e.g. "Oil Change". Omit to list all.
         """
         return {"service_types": service_tools.get_service_details(service_type)}
+
+    @function_tool()
+    async def find_branch(
+        self, context: RunContext, city: str | None = None, area: str | None = None, service: str | None = None, brand: str | None = None
+    ):
+        """Find the most appropriate Santo Domingo Motors branch.
+        Args:
+            city: The customer's city (e.g., "Santo Domingo", "Santiago").
+            area: The customer's area, if known.
+            service: "sales", "service", or "parts".
+            brand: The vehicle brand (e.g., "Nissan").
+        """
+        return branch_tools.find_branch(city=city, area=area, service=service, brand=brand)
 
     @function_tool()
     async def get_service_locations(self, context: RunContext):
@@ -65,7 +80,7 @@ class ServiceAgent(DepartmentAgent):
         """Check available service appointment slots at a location for a date.
 
         Args:
-            location_id: Location ID, e.g. "L1".
+            location_id: The ID of the branch (e.g. 'kennedy', 'luperon'). Use get_service_locations to get this.
             date: Date in YYYY-MM-DD format.
         """
         slots = service_tools.check_service_availability(location_id, date)
@@ -90,7 +105,7 @@ class ServiceAgent(DepartmentAgent):
             phone: Customer's phone number.
             vehicle: Vehicle make/model or plate mentioned by the customer.
             service_type: Type of service requested, e.g. "Oil Change".
-            location: Location ID, e.g. "L1".
+            location: The ID of the branch (e.g. 'kennedy', 'luperon'). Use find_branch to get this.
             date: Date in YYYY-MM-DD format.
             time: Time in HH:MM (24h) format, must be one of the available slots.
         """

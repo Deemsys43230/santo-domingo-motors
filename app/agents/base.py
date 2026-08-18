@@ -73,4 +73,4 @@ class DepartmentAgent(Agent):
         from app.agents.supervisor import SupervisorAgent
 
         log.info("Routing: %s -> Supervisor", self.department)
-        return SupervisorAgent(), "Let me bring you back to our main assistant to redirect you."
+        return SupervisorAgent(chat_ctx=self.chat_ctx.copy(exclude_instructions=True)), "Let me bring you back to our main assistant to redirect you."

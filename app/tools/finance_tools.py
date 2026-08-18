@@ -3,16 +3,14 @@ finance_tools.py
 -----------------
 Plain Python functions backing the Finance Agent journey.
 
-Tools implemented:
-    1. send_customer_otp      — Send a verification code to the customer's phone
-    2. verify_customer_otp    — Verify the code the customer provides
-    3. get_vehicle_brands     — List available vehicle brands
-    4. get_vehicle_models     — List models for a given brand
-    5. get_vehicle_details    — Full vehicle record including price
-    6. get_financing_banks    — List available financing banks
-    7. get_financing_plans    — Plans for a specific bank
-    8. calculate_financing    — Amortizing-loan monthly payment calculation
-    9. create_finance_lead    — Create an idempotent finance lead record
+6. Tools implemented:
+    1. get_vehicle_brands     — List available vehicle brands
+    2. get_vehicle_models     — List models for a given brand
+    3. get_vehicle_details    — Full vehicle record including price
+    4. get_financing_banks    — List available financing banks
+    5. get_financing_plans    — Plans for a specific bank
+    6. calculate_financing    — Amortizing-loan monthly payment calculation
+    7. create_finance_lead    — Create an idempotent finance lead record
 
 IMPORTANT:
     - Vehicle prices come from the vehicle data source, NEVER invented.
@@ -27,7 +25,6 @@ from __future__ import annotations
 from datetime import datetime, timezone
 
 from app import data_store
-from app.services.otp_service import send_otp, verify_otp
 from app.utils.ids import new_finance_lead_id, new_idempotency_key
 from app.utils.logger import get_logger
 
@@ -57,40 +54,6 @@ def _get_exchange_rate() -> float:
 def _usd_to_dop(amount_usd: float) -> float:
     """Convert a USD amount to DOP."""
     return round(amount_usd * _get_exchange_rate(), 2)
-
-
-# ---------------------------------------------------------------------------
-# 1. OTP Tools
-# ---------------------------------------------------------------------------
-
-def send_customer_otp(phone: str, email: str | None = None) -> dict:
-    """Send a verification code to the customer's phone number.
-
-    Args:
-        phone: Customer's phone number.
-        email: Customer's email for backup delivery (optional).
-
-    Returns:
-        dict with success status and message.
-    """
-    result = send_otp(phone=phone, email=email)
-    log.info("send_customer_otp phone=%s success=%s", phone, result.get("success"))
-    return result
-
-
-def verify_customer_otp(phone: str, otp: str) -> dict:
-    """Verify the OTP code provided by the customer.
-
-    Args:
-        phone: The phone number the OTP was sent to.
-        otp: The OTP code the customer provided.
-
-    Returns:
-        dict with verified (bool), reason, and message.
-    """
-    result = verify_otp(phone=phone, otp=otp)
-    log.info("verify_customer_otp phone=%s verified=%s", phone, result.get("verified"))
-    return result
 
 
 # ---------------------------------------------------------------------------
