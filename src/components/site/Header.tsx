@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, Search, X } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { useTestDrive } from "./TestDriveContext";
+import { brands } from "@/data/vehicles";
 
 const brandLinks = [
   { label: "Cadillac", href: "#vehicles" },
@@ -52,64 +53,23 @@ export function Header() {
         </a>
 
         {/* Desktop Nav */}
-        <nav className="hidden items-center gap-7 xl:flex">
-          {/* Brands dropdown */}
-          <div
-            className="relative"
-            onMouseEnter={() => setBrandsOpen(true)}
-            onMouseLeave={() => setBrandsOpen(false)}
-          >
-            <button className="flex items-center gap-1 text-[12px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors hover:text-[#FFC72C]">
-              {t.nav.brands}
-              <ChevronDown className="h-3 w-3 transition-transform duration-200" style={{ transform: brandsOpen ? "rotate(180deg)" : "rotate(0deg)" }} />
-            </button>
-            <AnimatePresence>
-              {brandsOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 8 }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute left-0 top-full mt-2 min-w-[160px] border border-white/10 bg-[#080808] py-2 shadow-xl"
-                >
-                  {brandLinks.map((b) => (
-                    <a
-                      key={b.label}
-                      href={b.href}
-                      className="block px-5 py-2.5 text-[12px] font-semibold uppercase tracking-[0.12em] text-white/70 transition-colors hover:bg-[#FFC72C] hover:text-[#080808]"
-                    >
-                      {b.label}
-                    </a>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-
-          {mainLinks.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="relative text-[12px] font-semibold uppercase tracking-[0.14em] text-white/75 transition-colors after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-[#FFC72C] after:transition-all after:duration-300 hover:text-white hover:after:w-full"
-            >
-              {l.label}
-            </a>
+        <nav className="hidden items-center gap-8 xl:flex ml-auto mr-8">
+          {["Cadillac", "Chevrolet", "Infiniti", "Nissan", "Suzuki", "Yamaha"].map((b) => (
+            <div key={b} className="relative group cursor-pointer">
+              <a href="#vehicles" className="flex items-center gap-1 text-[15px] font-medium text-white transition-colors hover:text-white/70">
+                {b}
+                <ChevronDown className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" />
+              </a>
+            </div>
           ))}
         </nav>
 
         {/* Right Actions */}
-        <div className="flex items-center gap-4 sm:gap-5">
-          <button
-            aria-label={t.nav.search}
-            className="text-white/70 transition-colors hover:text-[#FFC72C]"
-          >
-            <Search className="h-[18px] w-[18px]" />
-          </button>
-
-          <div className="flex items-center gap-1 text-[11px] font-semibold tracking-[0.15em]">
+        <div className="flex items-center gap-5">
+          <div className="flex items-center gap-2 text-[14px] font-bold tracking-wider">
             {(["en", "es"] as const).map((l, i) => (
-              <span key={l} className="flex items-center gap-1">
-                {i === 1 && <span className="text-white/30">|</span>}
+              <span key={l} className="flex items-center gap-2">
+                {i === 1 && <span className="text-white/30 text-[12px] font-normal">|</span>}
                 <button
                   onClick={() => setLang(l)}
                   className={`uppercase transition-colors hover:text-[#FFC72C] ${lang === l ? "text-[#FFC72C]" : "text-white/50"
@@ -122,18 +82,11 @@ export function Header() {
           </div>
 
           <button
-            onClick={() => openModal()}
-            className="eyebrow hidden px-5 py-2.5 text-[11px] font-semibold bg-[#FFC72C] text-[#080808] transition-all hover:bg-white sm:block"
-          >
-            {t.nav.contact}
-          </button>
-
-          <button
             aria-label={t.nav.menu}
             onClick={() => setMenu((m) => !m)}
             className="text-white xl:hidden"
           >
-            {menu ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {menu ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
       </div>

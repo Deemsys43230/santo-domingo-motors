@@ -5,6 +5,20 @@ import van from "@/assets/v-van.jpg";
 import moto from "@/assets/v-moto.jpg";
 import crossover from "@/assets/v-crossover.jpg";
 
+import cadillac_escalade from "@/assets/generated/cadillac_escalade_1787850081539.jpg";
+import chevrolet_express from "@/assets/generated/chevrolet_express_1787850171909.jpg";
+import chevrolet_silverado from "@/assets/generated/chevrolet_silverado_1787850124973.jpg";
+import infiniti_q50 from "@/assets/generated/infiniti_q50_1787850097064.jpg";
+import nissan_altima from "@/assets/generated/nissan_altima_1787850110906.jpg";
+import nissan_frontier from "@/assets/generated/nissan_frontier_1787850157204.jpg";
+import nissan_pathfinder from "@/assets/generated/nissan_pathfinder_1787850058100.jpg";
+import chevrolet_malibu from "@/assets/generated/Chevrolet Malibu at Sunset.png";
+import chevrolet_tahoe from "@/assets/generated/Chevrolet Tahoe at Golden Hour.png";
+import suzuki_vitara from "@/assets/generated/Grand Vitara at Sunset Mountains.png";
+import infiniti_qx60 from "@/assets/generated/Infiniti QX60 by the Mountain Lake.png";
+import nissan_sentra from "@/assets/generated/Nissan Sentra SR at Golden Hour.png";
+import suzuki_carry from "@/assets/generated/Suzuki Carry Pro at Golden Hour.png";
+
 export type Category = "suvs" | "sedans" | "pickups" | "commercial" | "motorcycles";
 
 export type Vehicle = {
@@ -25,7 +39,7 @@ export const vehicles: Vehicle[] = [
     category: "suvs",
     spec: { en: "3.5L V6 · AWD · 7 seats", es: "3.5L V6 · AWD · 7 plazas" },
     price: 52900,
-    image: suv,
+    image: nissan_pathfinder,
   },
   {
     id: "escalade",
@@ -34,7 +48,7 @@ export const vehicles: Vehicle[] = [
     category: "suvs",
     spec: { en: "6.2L V8 · 4WD · 8 seats", es: "6.2L V8 · 4WD · 8 plazas" },
     price: 98400,
-    image: crossover,
+    image: cadillac_escalade,
   },
   {
     id: "q50",
@@ -43,7 +57,7 @@ export const vehicles: Vehicle[] = [
     category: "sedans",
     spec: { en: "3.0L Twin-Turbo · 400 hp", es: "3.0L Biturbo · 400 hp" },
     price: 61200,
-    image: sedan,
+    image: infiniti_q50,
   },
   {
     id: "altima",
@@ -52,7 +66,7 @@ export const vehicles: Vehicle[] = [
     category: "sedans",
     spec: { en: "2.0L VC-Turbo · CVT", es: "2.0L VC-Turbo · CVT" },
     price: 34500,
-    image: sedan,
+    image: nissan_altima,
   },
   {
     id: "silverado",
@@ -61,7 +75,7 @@ export const vehicles: Vehicle[] = [
     category: "pickups",
     spec: { en: "5.3L V8 · 4x4 · Tow 5.4t", es: "5.3L V8 · 4x4 · Arrastre 5.4t" },
     price: 71800,
-    image: pickup,
+    image: chevrolet_silverado,
   },
   {
     id: "frontier",
@@ -70,7 +84,7 @@ export const vehicles: Vehicle[] = [
     category: "pickups",
     spec: { en: "3.8L V6 · 4x4 · Off-road", es: "3.8L V6 · 4x4 · Todoterreno" },
     price: 46300,
-    image: pickup,
+    image: nissan_frontier,
   },
   {
     id: "express",
@@ -79,7 +93,7 @@ export const vehicles: Vehicle[] = [
     category: "commercial",
     spec: { en: "Diesel · 12.5 m³ cargo", es: "Diésel · 12.5 m³ de carga" },
     price: 43900,
-    image: van,
+    image: chevrolet_express,
   },
   {
     id: "carry",
@@ -88,26 +102,9 @@ export const vehicles: Vehicle[] = [
     category: "commercial",
     spec: { en: "1.5L · 940 kg payload", es: "1.5L · 940 kg de carga" },
     price: 21700,
-    image: van,
+    image: suzuki_carry,
   },
-  {
-    id: "mt09",
-    brand: "Yamaha",
-    model: "MT-09 SP",
-    category: "motorcycles",
-    spec: { en: "890cc · 117 hp · Quickshift", es: "890cc · 117 hp · Quickshift" },
-    price: 12400,
-    image: moto,
-  },
-  {
-    id: "gsx",
-    brand: "Suzuki",
-    model: "GSX-8S",
-    category: "motorcycles",
-    spec: { en: "776cc parallel-twin · 82 hp", es: "776cc bicilíndrico · 82 hp" },
-    price: 9800,
-    image: moto,
-  },
+
   {
     id: "vitara",
     brand: "Suzuki",
@@ -115,7 +112,7 @@ export const vehicles: Vehicle[] = [
     category: "suvs",
     spec: { en: "1.5L Hybrid · AWD", es: "1.5L Híbrido · AWD" },
     price: 29900,
-    image: crossover,
+    image: suzuki_vitara,
   },
   {
     id: "malibu",
@@ -124,7 +121,7 @@ export const vehicles: Vehicle[] = [
     category: "sedans",
     spec: { en: "2.0L Turbo · 9-speed", es: "2.0L Turbo · 9 velocidades" },
     price: 32100,
-    image: sedan,
+    image: chevrolet_malibu,
   },
 ];
 
@@ -136,7 +133,7 @@ export const usedVehicles = [
     year: 2022,
     km: 38400,
     price: 41900,
-    image: crossover,
+    image: infiniti_qx60,
     spec: { en: "3.5L V6 · AWD · One owner", es: "3.5L V6 · AWD · Único dueño" },
   },
   {
@@ -146,7 +143,7 @@ export const usedVehicles = [
     year: 2021,
     km: 52100,
     price: 47500,
-    image: suv,
+    image: chevrolet_tahoe,
     spec: { en: "5.3L V8 · 7 seats · Certified", es: "5.3L V8 · 7 plazas · Certificado" },
   },
   {
@@ -156,12 +153,12 @@ export const usedVehicles = [
     year: 2023,
     km: 19700,
     price: 22800,
-    image: sedan,
+    image: nissan_sentra,
     spec: { en: "2.0L · CVT · Warranty", es: "2.0L · CVT · Con garantía" },
   },
 ];
 
-export const brands = ["Nissan", "Chevrolet", "Cadillac", "Infiniti", "Suzuki", "Yamaha"];
+export const brands = ["Nissan", "Chevrolet", "Cadillac", "Infiniti", "Suzuki"];
 
 export const locations = [
   {
