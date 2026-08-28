@@ -18,6 +18,7 @@ import suzuki_vitara from "@/assets/generated/Grand Vitara at Sunset Mountains.p
 import infiniti_qx60 from "@/assets/generated/Infiniti QX60 by the Mountain Lake.png";
 import nissan_sentra from "@/assets/generated/Nissan Sentra SR at Golden Hour.png";
 import suzuki_carry from "@/assets/generated/Suzuki Carry Pro at Golden Hour.png";
+import yamaha_mt09 from "@/assets/generated/Yamaha MT-09 SP at Sunset.png";
 
 export type Category = "suvs" | "sedans" | "pickups" | "commercial" | "motorcycles";
 
@@ -60,15 +61,6 @@ export const vehicles: Vehicle[] = [
     image: infiniti_q50,
   },
   {
-    id: "altima",
-    brand: "Nissan",
-    model: "Altima SR",
-    category: "sedans",
-    spec: { en: "2.0L VC-Turbo · CVT", es: "2.0L VC-Turbo · CVT" },
-    price: 34500,
-    image: nissan_altima,
-  },
-  {
     id: "silverado",
     brand: "Chevrolet",
     model: "Silverado High Country",
@@ -76,6 +68,33 @@ export const vehicles: Vehicle[] = [
     spec: { en: "5.3L V8 · 4x4 · Tow 5.4t", es: "5.3L V8 · 4x4 · Arrastre 5.4t" },
     price: 71800,
     image: chevrolet_silverado,
+  },
+  {
+    id: "vitara",
+    brand: "Suzuki",
+    model: "Grand Vitara AllGrip",
+    category: "suvs",
+    spec: { en: "1.5L Hybrid · AWD", es: "1.5L Híbrido · AWD" },
+    price: 29900,
+    image: suzuki_vitara,
+  },
+  {
+    id: "mt09",
+    brand: "Yamaha",
+    model: "MT-09 SP",
+    category: "motorcycles",
+    spec: { en: "890cc CP3 · 119 hp", es: "890cc CP3 · 119 hp" },
+    price: 12500,
+    image: yamaha_mt09,
+  },
+  {
+    id: "altima",
+    brand: "Nissan",
+    model: "Altima SR",
+    category: "sedans",
+    spec: { en: "2.0L VC-Turbo · CVT", es: "2.0L VC-Turbo · CVT" },
+    price: 34500,
+    image: nissan_altima,
   },
   {
     id: "frontier",
@@ -103,16 +122,6 @@ export const vehicles: Vehicle[] = [
     spec: { en: "1.5L · 940 kg payload", es: "1.5L · 940 kg de carga" },
     price: 21700,
     image: suzuki_carry,
-  },
-
-  {
-    id: "vitara",
-    brand: "Suzuki",
-    model: "Grand Vitara AllGrip",
-    category: "suvs",
-    spec: { en: "1.5L Hybrid · AWD", es: "1.5L Híbrido · AWD" },
-    price: 29900,
-    image: suzuki_vitara,
   },
   {
     id: "malibu",
@@ -158,7 +167,7 @@ export const usedVehicles = [
   },
 ];
 
-export const brands = ["Nissan", "Chevrolet", "Cadillac", "Infiniti", "Suzuki"];
+export const brands = ["Nissan", "Chevrolet", "Cadillac", "Infiniti", "Suzuki", "Yamaha"];
 
 export const locations = [
   {

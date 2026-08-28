@@ -8,7 +8,7 @@ import chevrolet from "@/assets/generated/Chevrolet Tahoe at Golden Hour.png";
 import infiniti from "@/assets/generated/Infiniti QX60 by the Mountain Lake.png";
 import nissan from "@/assets/generated/nissan_pathfinder_1787850058100.jpg";
 import suzuki from "@/assets/generated/Grand Vitara at Sunset Mountains.png";
-import yamaha from "@/assets/generated/infiniti_q50_1787850097064.jpg";
+import yamaha from "@/assets/generated/Yamaha MT-09 SP at Sunset.png";
 
 const slides = [
   {
@@ -54,7 +54,7 @@ const slides = [
   {
     id: "yamaha",
     brand: "YAMAHA",
-    model: "SPORTS RIDE",
+    model: "MT-09 SP",
     tagline: "Revs Your Heart",
     image: yamaha,
     imageClass: "object-cover object-[75%_center]",
@@ -76,7 +76,7 @@ export function Hero() {
   useEffect(() => {
     const timer = setInterval(() => {
       paginate(1);
-    }, 6000);
+    }, 5000);
     return () => clearInterval(timer);
   }, [page]);
 
@@ -90,12 +90,12 @@ export function Hero() {
     center: {
       zIndex: 10,
       opacity: 1,
-      transition: { duration: 1.2, ease: "easeInOut" }
+      transition: { duration: 0.6, ease: "easeInOut" }
     },
     exit: {
       zIndex: 0,
       opacity: 0,
-      transition: { duration: 1.2, ease: "easeInOut" }
+      transition: { duration: 0.6, ease: "easeInOut" }
     }
   };
 
